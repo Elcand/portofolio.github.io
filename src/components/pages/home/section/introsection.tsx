@@ -1,10 +1,10 @@
 function Intro() {
   return (
     <>
-      <section id="about" className="py-20 bg-gray-100">
+      <section className="py-20 bg-gray-100">
         <div className="container px-6 mx-auto">
           <h2 className="mb-12 text-4xl font-bold text-center">About Me</h2>
-          <div className="max-w-6xl mx-auto text-left">
+          <div className="text-left mx-9">
             <p className="mb-6 text-lg leading-relaxed text-gray-700">
               I am a vocational high school student majoring in Software
               Engineering who underwent a Field Work Internship (PKL) at a
