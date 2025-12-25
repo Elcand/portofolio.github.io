@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom"
+
 function Header() {
   return (
-    <header className="w-full">
+    <header className="sticky w-full">
       <div className="mx-auto flex h-[75px] max-w-[1356px] items-center justify-between px-6 md:px-10">
         
         {/* Logo */}
@@ -8,25 +10,25 @@ function Header() {
 
         {/* Navigation */}
         <nav className="flex gap-6 md:gap-10">
-          <a
-            href="#home"
+          <Link
+            to="#home"
             className="text-lg font-bold text-black transition-colors hover:text-gray-600"
           >
             Home
-          </a>
-          <a
-            href="#projects"
+          </Link>
+          <Link
+            to="#projects"
             className="text-lg font-bold text-black transition-colors hover:text-gray-600"
           >
             Project
-          </a>
+          </Link>
 
-          <a
-            href="#contact"
+          <Link
+            to="#contact"
             className="text-lg font-bold text-black transition-colors hover:text-gray-600"
           >
             Contact
-          </a>
+          </Link>
         </nav>
       </div>
     </header>

@@ -1,22 +1,30 @@
-import type { ReactNode } from "react";
-import Header from "./components/layouts/header";
-import Footer from "./components/layouts/footer";
+import { Route, Routes } from "react-router-dom";
+import Layout from "./components/layouts/layout";
+import Home from "./components/pages/home/view/home";
 
-type AppProps = {
-  children: ReactNode;
-};
-
-function App({ children }: AppProps) {
+function App() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
+    <Routes>
+      <Route path="/" element={
+        <Layout>
+          <Home />
+        </Layout>
+      } />
       
-      <main className="flex-1">
-        {children}
-      </main>
+      <Route path="/projects" element={
+        <Layout>
+          {/* <Projects /> */}
+          haloo
+        </Layout>
+      } />
       
-      <Footer />
-    </div>
+      <Route path="/contact" element={
+        <Layout>
+          {/* <Contact /> */}
+          haloo
+        </Layout>
+      } />
+    </Routes>
   );
 }
 
