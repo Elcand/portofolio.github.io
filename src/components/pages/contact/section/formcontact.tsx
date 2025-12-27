@@ -11,13 +11,6 @@ const FormContact = () => {
     message: ''
   });
 
-  interface FormData {
-    name: string;
-    email: string;
-    subject: string;
-    message: string;
-  }
-
   // State untuk menangani pesan error validasi
   const [errors, setErrors] = useState({});
 
@@ -25,7 +18,7 @@ const FormContact = () => {
   const [status, setStatus] = useState('idle');
 
   // Fungsi untuk menangani perubahan input
-  const handleChange = ({e}: ) => {
+  const handleChange = ({e}) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
