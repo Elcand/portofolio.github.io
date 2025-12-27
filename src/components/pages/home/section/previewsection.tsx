@@ -15,7 +15,7 @@ function Statistic() {
     <>
       <section className="py-20">
         <div className="container px-6 mx-auto">
-          <h2 className="mb-12 text-4xl font-bold text-center">Statistic</h2>
+          <h2 className="mb-12 text-4xl font-bold text-center">Preview Projects</h2>
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={30}
