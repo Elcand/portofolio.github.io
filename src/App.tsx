@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import Layout from "./components/layouts/layout";
-import Home from "./components/pages/home/view/home";
+import Layout from "@/components/layouts/layout";
+import Home from "@/components/pages/home/view/home";
+import Contact from "@/components/pages/contact/view/contact";
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -24,8 +25,7 @@ function App() {
       
       <Route path="/contact" element={
         <Layout>
-          {/* <Contact /> */}
-          haloo
+          <Contact />
         </Layout>
       } />
     </Routes>

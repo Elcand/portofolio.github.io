@@ -11,7 +11,7 @@ function Header() {
         {/* Navigation */}
         <nav className="flex gap-6 md:gap-10">
           <Link
-            to="#home"
+            to="/"
             className="text-lg font-bold text-black transition-colors hover:text-gray-600"
           >
             Home
@@ -24,7 +24,7 @@ function Header() {
           </Link>
 
           <Link
-            to="#contact"
+            to="/contact"
             className="text-lg font-bold text-black transition-colors hover:text-gray-600"
           >
             Contact
