@@ -1,9 +1,9 @@
-import FormContact from "../section/formcontact";
+import ContactForm from "../section/contactform";
 
 function Contact() {
   return(
     <>
-    <FormContact />
+    <ContactForm />
     </>
   )
 }
