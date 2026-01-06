@@ -1,5 +1,3 @@
-import React from 'react';
-
 // Impor ikon yang dibutuhkan
 import {
   FaHtml5,

@@ -1,11 +1,20 @@
-// src/components/ContactForm.js
+import { useState } from "react";
+import { Mail, Phone, Send } from "lucide-react";
 
-import React, { useState } from "react";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+type FormData = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
+
+type FormErrors = Partial<Record<keyof FormData, string>>;
+
+type Status = "idle" | "loading" | "success" | "error";
 
 const ContactForm = () => {
   // State untuk menyimpan data form
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     subject: "",
@@ -13,27 +22,30 @@ const ContactForm = () => {
   });
 
   // State untuk menangani pesan error validasi
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<FormErrors>({});
 
   // State untuk status pengiriman (idle, loading, success, error)
-  const [status, setStatus] = useState("idle");
+  const [status, setStatus] = useState<Status>("idle");
 
   // Fungsi untuk menangani perubahan input (BUG FIX: removed destructuring from parameter)
-  const handleChange = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
     // Clear error untuk field yang sedang diubah
-    if (errors[name]) {
+    if (errors[name] as keyof FormData) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
   // Fungsi untuk validasi form
-  const validateForm = () => {
-    const tempErrors = {};
+  const validateForm = (): boolean => {
+    const tempErrors: FormErrors = {};
+
     if (!formData.name.trim()) tempErrors.name = "Nama wajib diisi.";
     if (!formData.email.trim()) {
       tempErrors.email = "Email wajib diisi.";
@@ -48,19 +60,15 @@ const ContactForm = () => {
   };
 
   // Fungsi untuk menangani pengiriman form
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
 
     if (validateForm()) {
       setStatus("loading");
 
-      console.log("Mengirim data:", formData);
-
       try {
         // Simulasi delay jaringan (2 detik)
         await new Promise((resolve) => setTimeout(resolve, 2000));
-
-        console.log("Pesan berhasil dikirim!");
         setStatus("success");
 
         // Reset form setelah sukses
@@ -90,8 +98,10 @@ const ContactForm = () => {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {/* Informasi Kontak */}
           <div className="p-8">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800">Contact Information</h2>
-            
+            <h2 className="mb-6 text-2xl font-bold text-gray-800">
+              Contact Information
+            </h2>
+
             <div className="space-y-6">
               {/* Email */}
               <div className="flex items-start space-x-4">
@@ -99,7 +109,9 @@ const ContactForm = () => {
                   <Mail className="w-6 h-6 text-gray-600" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800 ">Email</h3>
+                  <h3 className="text-lg font-semibold text-gray-800 ">
+                    Email
+                  </h3>
                   <p className="text-gray-600">tjandraharja99@gmail.com</p>
                 </div>
               </div>
@@ -110,7 +122,9 @@ const ContactForm = () => {
                   <Phone className="w-6 h-6 text-gray-600" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800 ">Phone</h3>
+                  <h3 className="text-lg font-semibold text-gray-800 ">
+                    Phone
+                  </h3>
                   <p className="text-gray-600">+62 853-2989-9879</p>
                 </div>
               </div>
@@ -136,69 +150,70 @@ const ContactForm = () => {
 
           {/* Form Kontak */}
           <div className="p-8 bg-white border rounded-xl">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800">Send us a message</h2>
+            <h2 className="mb-6 text-2xl font-bold text-gray-800">
+              Send us a message
+            </h2>
 
             <form onSubmit={handleSubmit} noValidate className="space-y-5">
-             <div className="grid grid-cols-2 gap-4">
-               {/* Input Nama */}
-              <div className="col-span-1">
-                <label
-                  htmlFor="name"
-                  className="block mb-2 text-sm font-semibold text-gray-700"
-                >
-                  Full Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Masukkan nama lengkap Anda"
-                  className={`w-full px-4 py-3 border bg-white rounded-lg focus:outline-none focus:ring-2 transition-all ${
-                    errors.name
-                      ? "border-red-500 focus:ring-red-500 bg-red-50"
-                      : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                  }`}
-                />
-                {errors.name && (
-                  <p className="flex items-center mt-2 text-xs text-red-600">
-                    <span className="mr-1">⚠</span>
-                    {errors.name}
-                  </p>
-                )}
-              </div>
+              <div className="grid grid-cols-2 gap-4">
+                {/* Input Nama */}
+                <div className="col-span-1">
+                  <label
+                    htmlFor="name"
+                    className="block mb-2 text-sm font-semibold text-gray-700"
+                  >
+                    Full Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Masukkan nama lengkap Anda"
+                    className={`w-full px-4 py-3 border bg-white rounded-lg focus:outline-none focus:ring-2 transition-all ${
+                      errors.name
+                        ? "border-red-500 focus:ring-red-500 bg-red-50"
+                        : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                    }`}
+                  />
+                  {errors.name && (
+                    <p className="flex items-center mt-2 text-xs text-red-600">
+                      <span className="mr-1">⚠</span>
+                      {errors.name}
+                    </p>
+                  )}
+                </div>
 
-              {/* Input Email */}
-              <div className="col-span-1">
-                <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-semibold text-gray-700"
-                >
-                  Email Address <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="nama@email.com"
-                  className={`w-full px-4 py-3 border bg-white rounded-lg focus:outline-none focus:ring-2 transition-all ${
-                    errors.email
-                      ? "border-red-500 focus:ring-red-500 bg-red-50"
-                      : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                  }`}
-                />
-                {errors.email && (
-                  <p className="flex items-center mt-2 text-xs text-red-600">
-                    <span className="mr-1">⚠</span>
-                    {errors.email}
-                  </p>
-                )}
+                {/* Input Email */}
+                <div className="col-span-1">
+                  <label
+                    htmlFor="email"
+                    className="block mb-2 text-sm font-semibold text-gray-700"
+                  >
+                    Email Address <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="nama@email.com"
+                    className={`w-full px-4 py-3 border bg-white rounded-lg focus:outline-none focus:ring-2 transition-all ${
+                      errors.email
+                        ? "border-red-500 focus:ring-red-500 bg-red-50"
+                        : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                    }`}
+                  />
+                  {errors.email && (
+                    <p className="flex items-center mt-2 text-xs text-red-600">
+                      <span className="mr-1">⚠</span>
+                      {errors.email}
+                    </p>
+                  )}
+                </div>
               </div>
-
-             </div>
               {/* Input Subjek */}
               <div>
                 <label
