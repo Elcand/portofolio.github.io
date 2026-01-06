@@ -33,7 +33,7 @@ const ContactForm = () => {
 
   // Fungsi untuk validasi form
   const validateForm = () => {
-    let tempErrors = {};
+    const tempErrors = {};
     if (!formData.name.trim()) tempErrors.name = "Nama wajib diisi.";
     if (!formData.email.trim()) {
       tempErrors.email = "Email wajib diisi.";
@@ -95,22 +95,22 @@ const ContactForm = () => {
             <div className="space-y-6">
               {/* Email */}
               <div className="flex items-start space-x-4">
-                <div className="p-3 bg-blue-100 rounded-full">
-                  <Mail className="w-6 h-6 text-blue-600" />
+                <div className="p-3 bg-gray-100 rounded-full">
+                  <Mail className="w-6 h-6 text-gray-600" />
                 </div>
                 <div>
-                  <h3 className="mb-2 text-lg font-semibold text-gray-800">Email</h3>
+                  <h3 className="text-lg font-semibold text-gray-800 ">Email</h3>
                   <p className="text-gray-600">tjandraharja99@gmail.com</p>
                 </div>
               </div>
 
               {/* Telepon */}
               <div className="flex items-start space-x-4">
-                <div className="p-3 bg-green-100 rounded-full">
-                  <Phone className="w-6 h-6 text-green-600" />
+                <div className="p-3 bg-gray-100 rounded-full">
+                  <Phone className="w-6 h-6 text-gray-600" />
                 </div>
                 <div>
-                  <h3 className="mb-2 text-lg font-semibold text-gray-800">Phone</h3>
+                  <h3 className="text-lg font-semibold text-gray-800 ">Phone</h3>
                   <p className="text-gray-600">+62 853-2989-9879</p>
                 </div>
               </div>
@@ -135,12 +135,13 @@ const ContactForm = () => {
           </div>
 
           {/* Form Kontak */}
-          <div className="p-8 bg-white shadow-lg rounded-xl">
-            <h2 className="mb-6 text-2xl font-bold text-gray-800">Kirim Pesan</h2>
+          <div className="p-8 bg-white border rounded-xl">
+            <h2 className="mb-6 text-2xl font-bold text-gray-800">Send us a message</h2>
 
             <form onSubmit={handleSubmit} noValidate className="space-y-5">
-              {/* Input Nama */}
-              <div>
+             <div className="grid grid-cols-2 gap-4">
+               {/* Input Nama */}
+              <div className="col-span-1">
                 <label
                   htmlFor="name"
                   className="block mb-2 text-sm font-semibold text-gray-700"
@@ -154,7 +155,7 @@ const ContactForm = () => {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Masukkan nama lengkap Anda"
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-all ${
+                  className={`w-full px-4 py-3 border bg-white rounded-lg focus:outline-none focus:ring-2 transition-all ${
                     errors.name
                       ? "border-red-500 focus:ring-red-500 bg-red-50"
                       : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
@@ -169,7 +170,7 @@ const ContactForm = () => {
               </div>
 
               {/* Input Email */}
-              <div>
+              <div className="col-span-1">
                 <label
                   htmlFor="email"
                   className="block mb-2 text-sm font-semibold text-gray-700"
@@ -183,7 +184,7 @@ const ContactForm = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="nama@email.com"
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-all ${
+                  className={`w-full px-4 py-3 border bg-white rounded-lg focus:outline-none focus:ring-2 transition-all ${
                     errors.email
                       ? "border-red-500 focus:ring-red-500 bg-red-50"
                       : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
@@ -197,6 +198,7 @@ const ContactForm = () => {
                 )}
               </div>
 
+             </div>
               {/* Input Subjek */}
               <div>
                 <label
@@ -212,7 +214,7 @@ const ContactForm = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder="Topik pesan Anda"
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-all ${
+                  className={`w-full px-4 py-3 border bg-white rounded-lg focus:outline-none focus:ring-2 transition-all ${
                     errors.subject
                       ? "border-red-500 focus:ring-red-500 bg-red-50"
                       : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
@@ -241,7 +243,7 @@ const ContactForm = () => {
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Tulis pesan Anda di sini..."
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-all resize-none ${
+                  className={`w-full px-4 py-3 border rounded-lg bg-white focus:outline-none focus:ring-2 transition-all resize-none ${
                     errors.message
                       ? "border-red-500 focus:ring-red-500 bg-red-50"
                       : "border-gray-300 focus:ring-blue-500 focus:border-blue-500"
@@ -288,7 +290,7 @@ const ContactForm = () => {
                 ) : (
                   <>
                     <Send className="w-5 h-5" />
-                    <span>Kirim Pesan</span>
+                    <span>Submit</span>
                   </>
                 )}
               </button>
